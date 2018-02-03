@@ -7,9 +7,7 @@ class AssetContainer extends Component {
     }
     render() {
         return (
-            <div className="Asset">
-                <p className="App-intro">
-                </p>
+            <div className="asset">
             </div>
         );
     }
