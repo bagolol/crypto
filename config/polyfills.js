@@ -1,9 +1,20 @@
 'use strict';
-
-import { configure } from 'enzyme';
+import raf from './tempPolyfills'
+import Enzyme, { shallow, render, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-configure({ adapter: new Adapter() });
+// React 16 Enzyme adapter
+Enzyme.configure({ adapter: new Adapter() });
+
+// Make Enzyme functions available in all test files without importing
+global.shallow = shallow;
+global.render = render;
+global.mount = mount;
+
+// Fail tests on any warning
+console.error = message => {
+   throw new Error(message);
+};
 
 if (typeof Promise === 'undefined') {
   // Rejection tracking prevents a common issue where React gets into an
@@ -20,8 +31,3 @@ require('whatwg-fetch');
 // It will use the native implementation if it's present and isn't buggy.
 Object.assign = require('object-assign');
 
-// In tests, polyfill requestAnimationFrame since jsdom doesn't provide it yet.
-// We don't polyfill it in the browser--this is user's responsibility.
-if (process.env.NODE_ENV === 'test') {
-  require('raf').polyfill(global);
-}

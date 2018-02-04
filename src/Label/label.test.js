@@ -1,5 +1,4 @@
 import React from 'react';
-import { shallow, mount, render } from 'enzyme';
 import Label from './label';
 
 test('should render the Label component', () => {
