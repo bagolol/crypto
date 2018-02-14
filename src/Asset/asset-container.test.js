@@ -7,8 +7,14 @@ test('should render the Asset component', () => {
     expect(component.hasClass('asset')).toBe(true);
 });
 
-test('should retrive assets from binance after mount', () => {
-    window.fetch = jest.fn().mockImplementation(() =>
-        Promise.resolve(mockResponse(200, null, '[{bitcoins: 3}]')));
+test('should retrive assets and update state after mount', () => {
+    const assets = [{ bitcoin: 3 }, { litecoin: 3 }];
+    const promise = Promise.resolve(assets);
+    window.fetch = jest.fn().mockImplementation(() => promise);
+    const component = shallow(<Asset />);
+    return promise.then(() => {
+        expect(window.fetch).toHaveBeenCalled();
+        expect(component.state('assets')).toBe(assets);
+    });
 });
 

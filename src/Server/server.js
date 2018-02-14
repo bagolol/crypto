@@ -1,17 +1,26 @@
 import express from 'express';
 import urlBuilders from './urlBuilder';
 import { callApi } from './requester';
+import bodyParser from 'body-parser';
 
 const app = express();
 
-app.get('/', (req, res) => {
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+app.use(bodyParser.json());
+
+app.get('/api', (req, res) => {
     res.status(200).send('ok');
 });
 
-app.get('/binance', (req, res) => {
+app.get('/api/binance', (req, res) => {
     const binanceUrl = urlBuilders.getBinanceAssets();
     callApi(binanceUrl, 'GET')
-        .then(assets => res.status(200).send(assets))
+        .then(response => res.status(200).send(response))
         .catch(err => {
             res.send(err);
         });
