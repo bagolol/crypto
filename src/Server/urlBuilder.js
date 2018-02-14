@@ -10,4 +10,4 @@ const urlBuilders = {
     }
 }
 
-module.exports = urlBuilders;
+export default urlBuilders;

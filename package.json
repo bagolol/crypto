@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "crypto-tracker",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -45,15 +45,17 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "npm run build-server && node scripts/start.js",
     "build": "node scripts/build.js",
+    "build-server": "node_modules/.bin/webpack -d --config ./config/webpack.config.server.js",
     "test": "node scripts/test.js --env=jsdom"
   },
   "devDependencies": {
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "nock": "^9.1.6",
-    "raf": "^3.4.0"
+    "raf": "^3.4.0",
+    "supertest": "^3.0.0"
   },
   "jest": {
     "collectCoverageFrom": [

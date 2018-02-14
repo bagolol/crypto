@@ -5,6 +5,9 @@ class AssetContainer extends Component {
         super(props);
         this.state = {assets: []};
     }
+    componentDidMount() {
+
+    }
     render() {
         return (
             <div className="asset">

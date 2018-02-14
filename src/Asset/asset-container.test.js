@@ -7,7 +7,8 @@ test('should render the Asset component', () => {
     expect(component.hasClass('asset')).toBe(true);
 });
 
-test('should ', () => {
-    expect(1).toBe(1)
+test('should retrive assets from binance after mount', () => {
+    window.fetch = jest.fn().mockImplementation(() =>
+        Promise.resolve(mockResponse(200, null, '[{bitcoins: 3}]')));
 });
 

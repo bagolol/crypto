@@ -11,13 +11,12 @@ describe('loading express', () => {
     let callApi;
 
     beforeEach(() => {
-        server = require('./server');
-        urlBuilders = require('./urlBuilder');
+        server = require('./server').default;
+        urlBuilders = require('./urlBuilder').default;
         // callApi = require('./requester');
     });
 
     afterEach(() => {
-        server.close();
         jest.resetAllMocks();
     });
 
@@ -29,7 +28,6 @@ describe('loading express', () => {
 
     test('should build the binance url when /binance', async (done) => {
         const { status, response } = await request(server).get('/binance');
-        // expect(status).toBe(200);
         expect(urlBuilders.getBinanceAssets).toHaveBeenCalled();
         done();
     });

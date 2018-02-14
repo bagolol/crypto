@@ -4,11 +4,10 @@ import Label from '../Label/label';
 class AssetPresentation extends Component {
     constructor(props) {
         super(props);
-        this.state = {assets: []};
     }
     render() {
         return (
-            <Label name="bitcoin"/>
+            <Label name={this.props.assetName}/>
         );
     }
 }
