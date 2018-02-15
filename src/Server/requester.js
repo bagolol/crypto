@@ -1,7 +1,11 @@
 import request from 'request';
 
+const getEurQuatations = () => {
+
+
+}
 const callApi = (url, method) => {
-    var options = {
+    const options = {
         uri: url,
         method: method,
         headers: {
@@ -9,6 +13,7 @@ const callApi = (url, method) => {
         }
     };
     return new Promise((resolve, reject) => {
+        console.log(request, 'REQUEST');
         request(options, (err, res, body) => {
             if(err) reject(err);
             resolve(body)
