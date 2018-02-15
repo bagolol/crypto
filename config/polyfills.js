@@ -11,6 +11,7 @@ global.shallow = shallow;
 global.render = render;
 global.mount = mount;
 global.nock = nock;
+
 // Fail tests on any warning
 console.error = message => {
    throw new Error(message);

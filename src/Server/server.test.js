@@ -27,7 +27,7 @@ describe('loading express', () => {
     });
 
     test('should build the binance url when /binance', async (done) => {
-        const { status, response } = await request(server).get('/binance');
+        const { status, response } = await request(server).get('/api/binance');
         expect(urlBuilders.getBinanceAssets).toHaveBeenCalled();
         done();
     });
@@ -38,7 +38,7 @@ describe('loading express', () => {
         nock('https://api.binance.com')
             .get(/api(.*)/)
             .reply(200, binanceResponse);
-        const { status, text } = await request(server).get('/binance');
+        const { status, text } = await request(server).get('/api/binance');
         expect(status).toBe(200);
         expect(JSON.parse(text)).toEqual(binanceResponse)
         done();
