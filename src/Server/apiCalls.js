@@ -1,4 +1,5 @@
 import requestAsPromise from './requester';
+import { enrichAssets } from '../utils/helpers';
 
 const coinMarketUrl = 'https://api.coinmarketcap.com/v1/ticker/?convert=EUR&limit=150';
 
@@ -20,7 +21,7 @@ const getAssetAndQuotations = async (url, method) => {
     };
     const assets = await requestAsPromise(options);
     const quotations = await getEurQuotations(coinMarketUrl, 'GET');
-    return assets;
+    return enrichAssets(assets, quotations);
 };
 
 export default getAssetAndQuotations;
