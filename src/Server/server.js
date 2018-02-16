@@ -1,6 +1,6 @@
 import express from 'express';
 import urlBuilders from './urlBuilder';
-import { callApi } from './requester';
+import callApi from './requester';
 import bodyParser from 'body-parser';
 
 const app = express();

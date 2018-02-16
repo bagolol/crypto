@@ -1,19 +1,7 @@
 import request from 'request';
 
-const getEurQuatations = () => {
-
-
-}
-const callApi = (url, method) => {
-    const options = {
-        uri: url,
-        method: method,
-        headers: {
-            'X-MBX-APIKEY': process.env.BINANCE_API
-        }
-    };
+const requestAsPromise = (options) => {
     return new Promise((resolve, reject) => {
-        console.log(request, 'REQUEST');
         request(options, (err, res, body) => {
             if(err) reject(err);
             resolve(body)
@@ -21,6 +9,5 @@ const callApi = (url, method) => {
     });
 };
 
-export {
-    callApi
-};
+export default requestAsPromise;
+
