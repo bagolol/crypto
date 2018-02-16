@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Asset from './asset-presentation';
-import { filterOwned } from '../utils/helpers';
 
 class AssetContainer extends Component {
     constructor(props) {
@@ -10,7 +9,7 @@ class AssetContainer extends Component {
     componentDidMount() {
         fetch('http://localhost:3001/api/binance')
             .then(assets => assets.json())
-            .then(assets => this.setState({assets: filterOwned(assets.balances)}));
+            .then(assets => this.setState({ assets: assets }));
     }
     render() {
         return (

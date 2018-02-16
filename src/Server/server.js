@@ -1,6 +1,6 @@
 import express from 'express';
 import urlBuilders from './urlBuilder';
-import callApi from './requester';
+import getAssetAndQuotations from './apiCalls';
 import bodyParser from 'body-parser';
 
 const app = express();
@@ -19,7 +19,7 @@ app.get('/api', (req, res) => {
 
 app.get('/api/binance', (req, res) => {
     const binanceUrl = urlBuilders.getBinanceAssets();
-    callApi(binanceUrl, 'GET')
+    getAssetAndQuotations(binanceUrl, 'GET')
         .then(response => res.status(200).send(response))
         .catch(err => {
             res.send(err);

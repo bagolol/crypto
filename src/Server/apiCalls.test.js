@@ -3,10 +3,12 @@ jest.mock('./requester');
 import getAssetAndQuotations from './apiCalls';
 import request from './requester';
 
-const assets = [
+const binanceResponse = { balances: [
     {"asset":"BTC","free":"1.00000000","locked":"0.00000000"},
-    {"asset":"LTC","free":"1.00000000","locked":"0.00000000"}
-];
+    {"asset":"LTC","free":"1.00000000","locked":"0.00000000"},
+    {"asset":"AST","free":"0.00000000","locked":"0.00000000"}]
+};
+
 
 const valuations = [
     {
@@ -29,27 +31,30 @@ const enrichedValues = [
 
 const error = { error: "Unable to retrieve assets" };
 const rejectedPromise = jest.fn(() => Promise.reject(error));
-const successfulAssetsPromise = jest.fn(() => Promise.resolve(assets));
+const successfulAssetsPromise = jest.fn(() => Promise.resolve(binanceResponse));
 const successfulValuationsPromise = jest.fn(() => Promise.resolve(valuations));
 
 const coinMarketUrl = 'https://api.coinmarketcap.com';
 
-test('should get assets and their EUR quotations', async () => {
+test('should get assets and their EUR quotations', async (done) => {
     request
         .mockImplementationOnce(successfulAssetsPromise)
         .mockImplementationOnce(successfulValuationsPromise);
     const data = await getAssetAndQuotations(coinMarketUrl, 'GET');
     expect(data).toEqual(enrichedValues);
+    done();
 });
 
-test('should return an error when the first request fails', async () => {
+test('should return an error when the first request fails', async (done) => {
     request.mockImplementationOnce(rejectedPromise);
     await expect(getAssetAndQuotations(coinMarketUrl, 'GET')).rejects.toEqual(error);
+    done();
 });
 
-test('should return an error when the second request fails', async () => {
+test('should return an error when the second request fails', async (done) => {
     request
         .mockImplementationOnce(successfulAssetsPromise)
         .mockImplementationOnce(rejectedPromise);
     await expect(getAssetAndQuotations(coinMarketUrl, 'GET')).rejects.toEqual(error);
+    done();
 });

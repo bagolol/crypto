@@ -1,7 +1,7 @@
 import requestAsPromise from './requester';
-import { enrichAssets } from '../utils/helpers';
+import { enrichAssets, filterOwned } from '../utils/helpers';
 
-const coinMarketUrl = 'https://api.coinmarketcap.com/v1/ticker/?convert=EUR&limit=150';
+const coinMarketUrl = 'https://api.coinmarketcap.com/v1/ticker/?convert=EUR&limit=300';
 
 const getEurQuotations = (url, method) => {
     const options = {
@@ -19,9 +19,11 @@ const getAssetAndQuotations = async (url, method) => {
             'X-MBX-APIKEY': process.env.BINANCE_API
         }
     };
-    const assets = await requestAsPromise(options);
-    const quotations = await getEurQuotations(coinMarketUrl, 'GET');
-    return enrichAssets(assets, quotations);
+    //devo farlo qui l'enrich? o sul browser?
+    const assets = JSON.parse(await requestAsPromise(options));
+    const ownedAssets = filterOwned(assets.balances);
+    const quotations = JSON.parse(await getEurQuotations(coinMarketUrl, 'GET'));
+    return enrichAssets(ownedAssets, quotations);
 };
 
 export default getAssetAndQuotations;

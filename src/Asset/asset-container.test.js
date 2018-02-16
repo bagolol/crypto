@@ -3,11 +3,10 @@ import { shallow, mount, render } from 'enzyme';
 import Asset from './asset-container';
 
 let promise;
-const binanceResponse = { balances: [
+const binanceResponse = [
     {"asset":"BTC","free":"1.00000000","locked":"0.00000000"},
     {"asset":"LTC","free":"1.00000000","locked":"0.00000000"},
-    {"asset":"AST","free":"0.00000000","locked":"0.00000000"}]
-};
+];
 
 beforeEach(() => {
     const json = { json: () => Promise.resolve(binanceResponse) };
