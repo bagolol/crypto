@@ -15,7 +15,7 @@ test('should render the Asset component', () => {
 test('should render children components', () => {
     const wrapper = shallow(<Asset assets={values}/>);
     expect(wrapper.find('Label').length).toBe(2);
-    expect(wrapper.find('Value').length).toBe(2);
+    expect(wrapper.find('Value').length).toBe(4);
 });
 
 test('should render children Label components', () => {
