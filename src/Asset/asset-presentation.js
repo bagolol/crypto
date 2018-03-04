@@ -8,7 +8,7 @@ const AssetPresentation = (props) => {
         <div className="asset" key={parseFloat(asset.free)}>
             <Label assetName={asset.asset} />
             <Value value={asset.free} />
-            <Value value={asset.price_eur} />
+            <Value value={asset.price_eur}> EUR</Value>
         </div>
     );
     return (

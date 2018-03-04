@@ -6,7 +6,7 @@ class AssetContainer extends Component {
         super(props);
         this.state = {assets: []};
     }
-    componentDidMount() {
+    componentWillMount() {
         fetch('http://localhost:3001/api/binance')
             .then(assets => assets.json())
             .then(assets => this.setState({ assets: assets }));

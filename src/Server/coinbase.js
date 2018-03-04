@@ -1,9 +1,29 @@
-import coinbase from 'coinbase';
-const client = new coinbase.Client({'apiKey': '123', 'apiSecret': '345'});
+import { Client } from 'coinbase';
+
+const client = new Client({
+    'apiKey': process.env.COINBASE_KEY,
+    'apiSecret': process.env.COINBASE_SECRET
+});
+
+const mapAccountsToAssets = accounts => {
+    return accounts.map(account => {
+        return {
+            "asset": account.balance.currency,
+            "free": account.balance.amount,
+            "locked": "0.00000000",
+            "price_eur": account.native_balance.amount
+        }
+    }).filter(asset => parseFloat(asset.free, 10) > 0);
+}
 
 const getCoinbaseBalance = () => {
-    return client.getAccount('account', (err, account) => {
-        console.log('bal: ' + account.balance.amount + ' currency: ' + account.balance.currency);
+    return new Promise((resolve, reject) => {
+        client.getAccounts({}, (err, accounts)  => {
+            if (err) {
+                reject(err)
+            }
+            resolve(mapAccountsToAssets(accounts));
+        });
     });
 };
 

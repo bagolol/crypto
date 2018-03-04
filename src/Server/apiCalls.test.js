@@ -62,6 +62,9 @@ test('should return an error when the second request fails', async (done) => {
 });
 
 test('should call coinbase to get the existing assets', async (done) => {
+    request
+        .mockImplementationOnce(successfulAssetsPromise)
+        .mockImplementationOnce(successfulValuationsPromise);
     await getAssetAndQuotations(testUrl, 'GET');
     expect(getCoinbaseBalance).toHaveBeenCalled();
     done();
