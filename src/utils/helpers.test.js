@@ -12,7 +12,7 @@ const assets = [
 ];
 
 const enrichedAssets = [
-    {"asset":"BTC","free":"1.00000000","locked":"0.00000000","price_eur": "8098.1094044"}
+    {"asset":"BTC","free":"1.00000000","locked":"0.00000000","price_eur": "8098.11"}
 ];
 
 const valuations = [

@@ -28,13 +28,18 @@ const valuations = JSON.stringify([
 ]);
 
 const enrichedValues = [
-    {"asset": "BTC", "free": "1.00000000", "locked": "0.00000000", "price_eur": "8098.1094044"}
+    {"asset": "BTC", "free": "1.00000000", "locked": "0.00000000", "price_eur": "8098.11"},
+    {"asset": "ETH", "free": "1.00000000", "locked": "0.00000000", "price_eur": "10"}
+];
+const coinbaseResult = [
+    {"asset": "ETH", "free": "1.00000000", "locked": "0.00000000", "price_eur": "10"}
 ];
 
 const error = { error: "Unable to retrieve assets" };
 const rejectedPromise = jest.fn(() => Promise.reject(error));
 const successfulAssetsPromise = jest.fn(() => Promise.resolve(binanceResponse));
 const successfulValuationsPromise = jest.fn(() => Promise.resolve(valuations));
+const successfulCoinbasePromise = jest.fn(() => Promise.resolve(coinbaseResult))
 
 const testUrl = 'https://api.test.com';
 
@@ -42,6 +47,7 @@ test('should get assets and their EUR quotations', async (done) => {
     request
         .mockImplementationOnce(successfulAssetsPromise)
         .mockImplementationOnce(successfulValuationsPromise);
+    getCoinbaseBalance.mockImplementationOnce(successfulCoinbasePromise);
     const data = await getAssetAndQuotations(testUrl, 'GET');
     expect(data).toEqual(enrichedValues);
     done();
