@@ -5,10 +5,10 @@ import './asset.css';
 
 const AssetPresentation = (props) => {
     const assets = props.assets.map((asset) =>
-        <div className="asset" key={parseFloat(asset.free)}>
+        <div className="asset" key={asset.free}>
             <Label assetName={asset.asset} />
             <Value value={asset.free} />
-            <Value value={asset.price_eur}> EUR</Value>
+            <Value value={asset.price_eur} currency='EUR'/>
         </div>
     );
     return (
