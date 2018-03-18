@@ -7,7 +7,7 @@ const filterOwned = (currencies => currencies.filter(currency => {
 const enrichAssets = ((assets, valuations) => {
   const values = []
     valuations.forEach(valuation => {
-        assets.filter(asset => {
+        assets.forEach(asset => {
             if(valuation.symbol === asset.asset) {
                 const amount = parseFloat(asset.free, 10);
                 const euroQuotation = parseFloat(valuation.price_eur, 10);

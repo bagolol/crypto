@@ -5,7 +5,7 @@ const client = new Client({
     'apiSecret': process.env.COINBASE_SECRET
 });
 
-const mapAccountsToAssets = accounts => {
+export const mapAccountsToAssets = accounts => {
     return accounts.map(account => {
         return {
             "asset": account.balance.currency,

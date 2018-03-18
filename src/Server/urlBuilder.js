@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 
 const urlBuilders = {
-    getBinanceAssets() {
+    createBinanceUrl() {
         const timestamp = new Date().getTime();
         const string = `&recvWindow=20000&timestamp=${timestamp}`;
 

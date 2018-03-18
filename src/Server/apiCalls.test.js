@@ -1,79 +1,32 @@
 import getAssetAndQuotations from './apiCalls';
-import request from './requester';
-import getCoinbaseBalance from './coinbase';
+import getBinanceAssets from './binanceAssets';
+import getCoinbaseBalance from './coinbaseBalance';
 
-jest.mock('./requester');
-jest.mock('./coinbase');
+jest.mock('./coinbaseBalance');
+jest.mock('./binanceAssets');
 
-const binanceResponse = JSON.stringify({ balances: [
-    {"asset":"BTC","free":"1.00000000","locked":"0.00000000"},
-    {"asset":"LTC","free":"1.00000000","locked":"0.00000000"},
-    {"asset":"AST","free":"0.00000000","locked":"0.00000000"}]
-});
-
-
-const valuations = JSON.stringify([
-    {
-        "id": "bitcoin",
-        "name": "Bitcoin",
-        "symbol": "BTC",
-        "price_eur": "8098.1094044",
-    },
-    {
-        "id": "ethereum",
-        "name": "Ethereum",
-        "symbol": "ETH",
-        "price_eur": "750.47210504",
-    }
-]);
-
-const enrichedValues = [
+const expectedResult = [
     {"asset": "BTC", "free": "1.00000000", "locked": "0.00000000", "price_eur": "8098.11"},
     {"asset": "ETH", "free": "1.00000000", "locked": "0.00000000", "price_eur": "10"}
 ];
-const coinbaseResult = [
-    {"asset": "ETH", "free": "1.00000000", "locked": "0.00000000", "price_eur": "10"}
-];
 
-const error = { error: "Unable to retrieve assets" };
+const error = new Error('unable to retrieve assets');
 const rejectedPromise = jest.fn(() => Promise.reject(error));
-const successfulAssetsPromise = jest.fn(() => Promise.resolve(binanceResponse));
-const successfulValuationsPromise = jest.fn(() => Promise.resolve(valuations));
-const successfulCoinbasePromise = jest.fn(() => Promise.resolve(coinbaseResult))
 
 const testUrl = 'https://api.test.com';
 
-test('should get assets and their EUR quotations', async (done) => {
-    request
-        .mockImplementationOnce(successfulAssetsPromise)
-        .mockImplementationOnce(successfulValuationsPromise);
-    getCoinbaseBalance.mockImplementationOnce(successfulCoinbasePromise);
+test('should get assets and their EUR quotations', async () => {
     const data = await getAssetAndQuotations(testUrl, 'GET');
-    expect(data).toEqual(enrichedValues);
-    done();
+    expect(data).toEqual(expectedResult);
 });
 
-test('should return an error when the first request fails', async (done) => {
-    request.mockImplementationOnce(rejectedPromise);
+test('should return an error when the first request fails', async () => {
+    getCoinbaseBalance.mockImplementationOnce(rejectedPromise);
     await expect(getAssetAndQuotations(testUrl, 'GET')).rejects.toEqual(error);
-    done();
 });
 
-test('should return an error when the second request fails', async (done) => {
-    request
-        .mockImplementationOnce(successfulAssetsPromise)
-        .mockImplementationOnce(rejectedPromise);
+test('should return an error when the second request fails', async () => {
+    getBinanceAssets.mockImplementationOnce(rejectedPromise);
     await expect(getAssetAndQuotations(testUrl, 'GET')).rejects.toEqual(error);
-    done();
 });
-
-test('should call coinbase to get the existing assets', async (done) => {
-    request
-        .mockImplementationOnce(successfulAssetsPromise)
-        .mockImplementationOnce(successfulValuationsPromise);
-    await getAssetAndQuotations(testUrl, 'GET');
-    expect(getCoinbaseBalance).toHaveBeenCalled();
-    done();
-});
-
 

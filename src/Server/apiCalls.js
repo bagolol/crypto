@@ -1,5 +1,5 @@
 import getBinanceAssets from './binanceAssets';
-import getCoinbaseBalance from './coinbase';
+import getCoinbaseBalance from './coinbaseBalance';
 import { mergeSameAssets } from '../utils/helpers';
 
 const getAssetAndQuotations = async () => {
