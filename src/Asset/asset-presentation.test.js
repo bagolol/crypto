@@ -3,8 +3,14 @@ import { shallow, mount, render } from 'enzyme';
 import Asset from './asset-presentation';
 
 const values = [
-    {"asset":"BTC","free":"1.00000000","locked":"0.00000000"},
-    {"asset":"LTC","free":"1.00000000","locked":"0.00000000"}
+    { asset: 'EUR',
+        free: '3',
+        locked: '0.00000000',
+        price_eur: '3' },
+    { asset: 'BTC',
+        free: '0.02344304',
+        locked: '0.00000000',
+        price_eur: '150' }
 ];
 
 test('should render the Asset component', () => {
@@ -18,8 +24,9 @@ test('should render children components', () => {
     expect(wrapper.find('Value').length).toBe(4);
 });
 
-test('should render children Label components', () => {
-    expect(1).toBe(1);
+test('should show the total in Euro', () => {
+    const wrapper = shallow(<Asset assets={values} total="153"/>);
+    expect(wrapper.find('.euro-total').text()).toBe("153");
 });
 
 

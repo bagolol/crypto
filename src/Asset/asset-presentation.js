@@ -12,9 +12,12 @@ const AssetPresentation = (props) => {
         </div>
     );
     return (
-        <div className="asset-container">
-            {assets}
-        </div>
+        <React.Fragment>
+            <div className="euro-total"><p>{props.total}</p></div>
+            <div className="asset-container">
+                {assets}
+            </div>
+        </React.Fragment>
     )
 }
 

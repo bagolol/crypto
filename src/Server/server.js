@@ -19,9 +19,7 @@ app.get('/api', (req, res) => {
 app.get('/api/binance', (req, res) => {
     getAssetAndQuotations()
         .then(response => res.status(200).send(response))
-        .catch(err => {
-            res.send(err);
-        });
+        .catch(err => res.send(err));
 });
 
 export default app;

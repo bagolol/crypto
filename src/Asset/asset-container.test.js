@@ -3,13 +3,19 @@ import { shallow, mount, render } from 'enzyme';
 import Asset from './asset-container';
 
 let promise;
-const binanceResponse = [
-    {"asset":"BTC","free":"1.00000000","locked":"0.00000000"},
-    {"asset":"LTC","free":"1.00000000","locked":"0.00000000"},
+const serverResponse = [
+{ asset: 'EUR',
+    free: '3',
+    locked: '0.00000000',
+    price_eur: '3' },
+  { asset: 'BTC',
+    free: '0.02344304',
+    locked: '0.00000000',
+    price_eur: '150' }
 ];
 
 beforeEach(() => {
-    const json = { json: () => Promise.resolve(binanceResponse) };
+    const json = { json: () => Promise.resolve(serverResponse) };
     promise = Promise.resolve(json);
     window.fetch = jest.fn().mockImplementation(() => promise);
 })
@@ -27,16 +33,13 @@ test('should retrive assets and update state after mount', () => {
     });
 });
 
-test('should retrive assets and update state with owned assets', () => {
-    const values = [
-        {"asset":"BTC","free":"1.00000000","locked":"0.00000000"},
-        {"asset":"LTC","free":"1.00000000","locked":"0.00000000"}
-    ];
-
+test('should retrive assets and update state with owned assets and euro total ', () => {
     const component = shallow(<Asset />);
 
     return promise.then(res => res.json()).then(() => {
-        expect(component.state('assets')).toEqual(values);
+        expect(component.state('assets')).toEqual(serverResponse);
+        expect(component.state('eurTotal')).toEqual(153);
     });
 });
+
 
