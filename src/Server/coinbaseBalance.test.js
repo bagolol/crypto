@@ -1,10 +1,7 @@
 import getCoinbaseBalance from './coinbaseBalance';
 import { Client } from 'coinbase';
 
-jest.mock('coinbase', () => {
-    const getAccounts = jest.fn();
-    return { Client: jest.fn(() => ({ getAccounts }))}
-});
+jest.mock('coinbase');
 
 const coinbase = new Client();
 
