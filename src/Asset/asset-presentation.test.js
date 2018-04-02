@@ -19,15 +19,22 @@ test('should render the Asset component', () => {
 });
 
 test('should render children components', () => {
-    const wrapper = shallow(<Asset assets={values}/>);
+    const wrapper = shallow(<Asset assets={ values }/>);
     expect(wrapper.find('Label').length).toBe(2);
     expect(wrapper.find('Value').length).toBe(4);
 });
 
 test('should show the total in Euro', () => {
-    const wrapper = shallow(<Asset assets={values} total="153"/>);
+    const wrapper = shallow(<Asset assets={ values } total="153"/>);
     expect(wrapper.find('.euro-total').text()).toBe("153");
 });
 
 
+test('should show details about a single asset when clicked', () => {
+    const showAssetDetails = jest.fn();
+    const component = shallow(<Asset assets={ values } showAssetDetails={ showAssetDetails }/>);
+    const firstAsset = component.find('.asset').first();
+    firstAsset.simulate('click');
+    expect(showAssetDetails).toHaveBeenCalledWith('EUR');
+});
 

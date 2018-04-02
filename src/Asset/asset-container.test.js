@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import Asset from './asset-container';
+import Assets from './asset-presentation';
 
 let promise;
 const serverResponse = [
@@ -33,7 +34,7 @@ test('should retrive assets and update state after mount', () => {
     });
 });
 
-test('should retrive assets and update state with owned assets and euro total ', () => {
+test('should retrieve assets and update state with owned assets and euro total ', () => {
     const component = shallow(<Asset />);
 
     return promise.then(res => res.json()).then(() => {
@@ -41,5 +42,25 @@ test('should retrive assets and update state with owned assets and euro total ',
         expect(component.state('eurTotal')).toEqual(153);
     });
 });
+
+test('should have a defualt state.showAsset value of true', () => {
+    const component = shallow(<Asset />);
+
+    expect(component.state('showAssets')).toEqual(true);
+});
+
+test('should hide all asset boxes when state.showAssets is set to false', () => {
+    const component = shallow(<Asset />);
+    expect(component.dive().find('.asset-container').length).toEqual(1)
+    expect(component.state('showAssets')).toEqual(true);
+
+    component.setState({ showAssets: false });
+
+    expect(component.dive().find('.asset-container').length).toEqual(0)
+    expect(component.state('showAssets')).toEqual(true);
+
+
+});
+
 
 

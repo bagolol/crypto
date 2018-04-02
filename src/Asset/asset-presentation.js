@@ -5,17 +5,20 @@ import './asset.css';
 
 const AssetPresentation = (props) => {
     const assets = props.assets.map((asset) =>
-        <div className="asset" key={asset.free}>
-            <Label assetName={asset.asset} />
-            <Value value={asset.free} />
-            <Value value={asset.price_eur} currency='EUR'/>
+        <div className="asset"
+            key={ asset.free }
+            onClick={ () => props.showAssetDetails(asset.asset) }
+        >
+            <Label assetName={ asset.asset }/>
+            <Value value={ asset.free }/>
+            <Value value={ asset.price_eur } currency='EUR'/>
         </div>
     );
     return (
         <React.Fragment>
-            <div className="euro-total"><p>{props.total}</p></div>
+            <div className="euro-total"><p>{ props.total }</p></div>
             <div className="asset-container">
-                {assets}
+                { assets }
             </div>
         </React.Fragment>
     )

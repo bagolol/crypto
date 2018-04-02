@@ -6,12 +6,17 @@ class AssetContainer extends Component {
         super(props);
         this.state = {
             assets: [],
+            showAssets: true,
             eurTotal: ''
         };
     }
     calculateTotal(assets) {
         return assets.reduce((acc, el) =>
             parseFloat(el.price_eur) + acc, 0);
+    }
+
+    showInfo(asset) {
+        console.log(asset, "HEREERE");
     }
 
     componentWillMount() {
@@ -26,7 +31,11 @@ class AssetContainer extends Component {
     }
     render() {
         return (
-            <Asset assets={this.state.assets} total={this.state.eurTotal} />
+            <Asset
+                assets={ this.state.assets }
+                total={ this.state.eurTotal }
+                showAssetDetails={ this.showInfo }
+            />
         );
     }
 }
