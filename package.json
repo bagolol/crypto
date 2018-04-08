@@ -55,7 +55,8 @@
     "start": "npm run build-server && node scripts/start.js",
     "build": "node scripts/build.js",
     "build-server": "node_modules/.bin/webpack -d --config ./config/webpack.config.server.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "postinstall": "node build/server.js"
   },
   "devDependencies": {
     "enzyme": "^3.3.0",
