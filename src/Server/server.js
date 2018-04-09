@@ -35,7 +35,7 @@ app.get('*', (req, res) => {
   let clientJSBundle = 'main.js';
   let clientCSSBundle = 'main.css';
   if (process.env.NODE_ENV === 'production') {
-    const manifest = require('optimo-client/build/asset-manifest.json'); // eslint-disable-line global-require,import/no-unresolved
+    const manifest = require('../../build/asset-manifest.json'); // eslint-disable-line global-require,import/no-unresolved
     clientJSBundle = manifest[clientJSBundle]; // eslint-disable-line
     clientCSSBundle = manifest[clientCSSBundle]; // eslint-disable-line
   }
