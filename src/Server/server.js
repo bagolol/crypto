@@ -2,7 +2,6 @@ import express from 'express';
 import getAssetAndQuotations from './apiCalls';
 import bodyParser from 'body-parser';
 import path from 'path';
-import cors from 'cors';
 
 const app = express();
 
@@ -25,7 +24,7 @@ app.get('/api', (req, res) => {
     res.status(200).send('ok');
 });
 
-app.get('/api/binance', cors(), (req, res) => {
+app.get('/api/binance', (req, res) => {
     getAssetAndQuotations()
         .then(response => res.status(200).send(response))
         .catch(err => res.send(err));
