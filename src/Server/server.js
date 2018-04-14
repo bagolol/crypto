@@ -3,8 +3,8 @@ import getAssetAndQuotations from './apiCalls';
 import bodyParser from 'body-parser';
 import path from 'path';
 
-const app = express();
 
+const app = express();
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/', function (req, res) {
