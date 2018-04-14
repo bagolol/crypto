@@ -7,10 +7,6 @@ import path from 'path';
 const app = express();
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -43,7 +39,7 @@ app.get('*', (req, res) => {
                             <head>
                               <meta charset="utf-8">
                               <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-                              <title>Optimo</title>
+                              <title>Crypto-App</title>
                               <link rel="stylesheet" href="/${clientCSSBundle}"></script>
                             </head>
                             <body>
