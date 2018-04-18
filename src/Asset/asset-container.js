@@ -20,7 +20,7 @@ class AssetContainer extends Component {
     }
 
     componentWillMount() {
-        fetch('http://localhost:3001/api/binance')
+        fetch('https://localhost:3001/api/binance')
             .then(assets => assets.json())
             .then(assets => {
                 this.setState({
