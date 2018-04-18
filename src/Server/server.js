@@ -5,7 +5,7 @@ import path from 'path';
 import { createServer } from 'http';
 
 const app = express();
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.set('trust proxy', true);
 app.use((req, res, next) => {
@@ -30,9 +30,9 @@ app.get('*', (req, res) => {
   let clientJSBundle = 'main.js';
   let clientCSSBundle = 'main.css';
   if (process.env.NODE_ENV === 'production') {
-    const manifest = require('../../build/asset-manifest.json'); // eslint-disable-line global-require,import/no-unresolved
-    clientJSBundle = manifest[clientJSBundle]; // eslint-disable-line
-    clientCSSBundle = manifest[clientCSSBundle]; // eslint-disable-line
+    const manifest = require('../../build/asset-manifest.json');
+    clientJSBundle = manifest[clientJSBundle];
+    clientCSSBundle = manifest[clientCSSBundle];
   }
 
   res.status(200).send(`<!DOCTYPE html>
