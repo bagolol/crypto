@@ -12,6 +12,6 @@ const options = {
 };
 
 // const server = https.createServer(options, app);
-
-server.listen(process.env.PORT || 3000, () => console.log('App listening at port %s', 3000));
+const PORT = 8080;
+server.listen(process.env.PORT || PORT, () => console.log('App listening at port %s', PORT));
 
