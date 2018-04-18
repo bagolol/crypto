@@ -11,11 +11,7 @@ const options = {
     cert
 };
 
-https.createServer(options, app).listen(443);
+const server = https.createServer(options, app);
 
-// const port = 3001;
-
-// const server = app.listen(port, () => {
-//     console.log('App listening at port %s', port);
-// });
+server.listen(443, () => console.log('App listening at port %s', 443));
 
