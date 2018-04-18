@@ -2,7 +2,7 @@ import express from 'express';
 import getAssetAndQuotations from './apiCalls';
 import bodyParser from 'body-parser';
 import path from 'path';
-
+import { createServer } from 'http';
 
 const app = express();
 app.use(express.static(path.join(__dirname, 'build')));
@@ -53,4 +53,6 @@ app.get('*', (req, res) => {
                             </body>
                           </html>`);
 });
-export default app;
+
+const server = createServer(app);
+export default server;
