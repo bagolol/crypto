@@ -13,5 +13,5 @@ const options = {
 
 const server = https.createServer(options, app);
 
-app.listen(3001, () => console.log('App listening at port %s', 3001));
+app.listen(process.env.PORT || 3000, () => console.log('App listening at port %s', 3000));
 
