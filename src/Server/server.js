@@ -6,6 +6,7 @@ import { createServer } from 'http';
 
 const app = express();
 app.use(express.static(path.join(__dirname, 'build')));
+console.log(path.join(__dirname, 'build'), "PAPAPAPAPAPAAPAPAPAAPAPAPA");
 
 app.set('trust proxy', true);
 app.use((req, res, next) => {
