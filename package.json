@@ -53,10 +53,11 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "npm run build-server && node scripts/start.js",
-    "build": "node scripts/build.js",
+    "start:dev": "npm run build-server && node scripts/start.js",
+    "build": "node scripts/build.js && npm run build-server",
     "build-server": "node_modules/.bin/webpack -d --config ./config/webpack.config.server.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "start": "NODE_ENV=production node ./build/server.js"
   },
   "devDependencies": {
     "enzyme": "^3.3.0",
