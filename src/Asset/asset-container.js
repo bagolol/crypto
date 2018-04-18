@@ -16,7 +16,6 @@ class AssetContainer extends Component {
     }
 
     showInfo(asset) {
-        console.log(asset, "HEREERE");
     }
 
     componentWillMount() {
@@ -27,7 +26,7 @@ class AssetContainer extends Component {
                     assets,
                     eurTotal: this.calculateTotal(assets)
                 })
-            }).catch(e => console.log(e));
+            });
     }
     render() {
         return (
