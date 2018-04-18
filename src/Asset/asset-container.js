@@ -27,7 +27,7 @@ class AssetContainer extends Component {
                     assets,
                     eurTotal: this.calculateTotal(assets)
                 })
-            });
+            }).catch(e => console.log(e));
     }
     render() {
         return (
