@@ -7,6 +7,7 @@ import path from 'path';
 const app = express();
 app.use(express.static(path.join(__dirname, 'build')));
 
+app.set('trust proxy', true);
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
