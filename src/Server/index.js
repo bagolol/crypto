@@ -1,4 +1,4 @@
-import app from './server';
+import server from './server';
 import fs from 'fs';
 import https from 'https';
 import path from 'path';
@@ -11,11 +11,7 @@ const options = {
     cert
 };
 
-https.createServer(options, app).listen(443);
-
-// const port = 3001;
-
-// const server = app.listen(port, () => {
-//     console.log('App listening at port %s', port);
-// });
+// const server = https.createServer(options, app);
+const PORT = 8080;
+server.listen(process.env.PORT || PORT, () => console.log('App listening at port %s', PORT));
 

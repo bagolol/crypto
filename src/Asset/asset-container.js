@@ -20,14 +20,14 @@ class AssetContainer extends Component {
     }
 
     componentWillMount() {
-        fetch('https://localhost:3001/api/binance')
+        fetch('/api/binance')
             .then(assets => assets.json())
             .then(assets => {
                 this.setState({
                     assets,
                     eurTotal: this.calculateTotal(assets)
                 })
-            });
+            }).catch(e => console.log(e));
     }
     render() {
         return (
