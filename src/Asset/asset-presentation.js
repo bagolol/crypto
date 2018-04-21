@@ -1,6 +1,5 @@
 import React from 'react';
 import Label from '../Label/label';
-import Value from '../Value/value';
 import './asset.css';
 
 const AssetPresentation = (props) => {
@@ -10,13 +9,13 @@ const AssetPresentation = (props) => {
             onClick={ () => props.showAssetDetails(asset.asset) }
         >
             <Label assetName={ asset.asset }/>
-            <Value value={ asset.free }/>
-            <Value value={ asset.price_eur } currency='EUR'/>
+            <p className="asset-value">{ asset.free }</p>
+            <p>{ asset.price_eur } €</p>
         </div>
     );
     return (
         <React.Fragment>
-            <div className="euro-total"><p>{ props.total }</p></div>
+            <div className="euro-value"><p>{ props.total }</p></div>
             <div className="asset-container">
                 { assets }
             </div>

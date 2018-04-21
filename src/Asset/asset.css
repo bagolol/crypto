@@ -14,7 +14,7 @@
   height: 132px;
   border: solid #1a2930;
 }
-.euro-total p:after {
+.euro-value p:after {
   padding-left: 3px;
   content: '€';
 }
