@@ -1,18 +1,15 @@
 .asset {
   padding: 10px;
   float: left;
-  border-right: solid #1a2930;
-  width: 9%;
+  border: solid #1a2930;
+  width: 10%;
   color: #0a1612;
 }
-.asset:last-child {
-  border-right: none;
-}
 .asset-container {
+  flex-wrap: wrap;
   margin: auto;
   width: 80%;
-  height: 132px;
-  border: solid #1a2930;
+  height: 50%;
 }
 .euro-value p:after {
   padding-left: 3px;

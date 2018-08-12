@@ -15,6 +15,7 @@ const enrichAssets = ((assets, valuations) => {
                 values.push(Object.assign(
                     {},
                     asset,
+                    { free: amount },
                     { price_eur: euroValue.toFixed(2) }
                 ));
             }
@@ -27,7 +28,7 @@ const mergeAssetValue = (asset1, asset2) => Object.assign(
     {},
     asset1,
     {
-        free: parseFloat(asset1.free, 10) + parseFloat(asset2.free, 10),
+        free: (parseFloat(asset1.free) + parseFloat(asset2.free)).toFixed(3),
         price_eur: (parseFloat(asset1.price_eur, 10) + parseFloat(asset2.price_eur, 10)).toFixed(2)
     }
 );
