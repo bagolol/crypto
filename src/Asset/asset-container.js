@@ -15,10 +15,7 @@ class AssetContainer extends Component {
             parseFloat(el.price_eur) + acc, 0);
     }
 
-    showInfo(asset) {
-    }
-
-    componentWillMount() {
+    componentDidMount() {
         fetch('/api/binance')
             .then(assets => assets.json())
             .then(assets => {

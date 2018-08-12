@@ -21,12 +21,11 @@ test('should render the Asset component', () => {
 test('should render children components', () => {
     const wrapper = shallow(<Asset assets={ values }/>);
     expect(wrapper.find('Label').length).toBe(2);
-    expect(wrapper.find('Value').length).toBe(4);
 });
 
 test('should show the total in Euro', () => {
     const wrapper = shallow(<Asset assets={ values } total="153"/>);
-    expect(wrapper.find('.euro-total').text()).toBe("153");
+    expect(wrapper.find('.euro-value').text()).toBe("153");
 });
 
 
